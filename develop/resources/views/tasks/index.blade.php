@@ -8,7 +8,7 @@
           <div class="panel-heading">フォルダ</div>
           <div class="panel-body">
             <a href="{{ route('folders.create') }}" class="btn btn-default btn-block">
-              フォルダを追加するtest2
+              フォルダを追加するtest3
             </a>
           </div>
           <div class="list-group">
