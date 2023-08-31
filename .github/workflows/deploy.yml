@@ -1,19 +1,30 @@
+name: Deploy to Production
+
 on:
   push:
     branches:
-      - master
-name: Deploy
+      - main
+
 jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@master
-      - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@2.0.0
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          LOCAL_DIR: ./
-          REMOTE_DIR: /http://todotest.xsrv.jp/public_html/
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Deploy to production
+      uses: easingthemes/ssh-deploy@v2
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        ARGS: "-rltgoDzvO --delete"  # Add additional rsync options if needed
+      with:
+        args: ${{ env.ARGS }}
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        port: ${{ secrets.PORT }}
+        source: "."  # Source directory for deployment
+        target: "/home/todohost/public_html"
+
+
+          # REMOTE_DIR: /http://todotest.xsrv.jp/public_html/
