@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - main
 name: Deploy
 jobs:
   FTP-Deploy-Action:
@@ -12,8 +12,8 @@ jobs:
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@2.0.0
         env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER: sv14703.xserver.jp
+          FTP_USERNAME: todotest
+          FTP_PASSWORD: rn1l2ilk
           LOCAL_DIR: ./
           REMOTE_DIR: /todotest.xsrv.jp/public_html/
